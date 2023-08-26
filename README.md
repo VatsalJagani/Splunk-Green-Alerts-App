@@ -20,6 +20,9 @@ Usually with Splunk alerts you create alert when there is issue with system whic
 
 ## What's inside the App
 
+* No of Custom Commands: **1**
+* No of Lookups - KVStore Collections: **2**
+
 
 
 ## Usage
