@@ -8,7 +8,7 @@ from splunk import rest
 import logging
 import logger_manager
 
-logger = logger_manager.setup_logging("cmd", logging.DEBUG)
+logger = logger_manager.setup_logging("cmd", logging.INFO)
 
 
 APP_NAME = "green_alerts_app"
@@ -53,35 +53,25 @@ class GreenAlertCommand(StreamingCommand):
 
 
     def write_kvstore_lookup_value(self, collection_name, data=None):
-        try:
-            _, serverContent = rest.simpleRequest(
-                f"/servicesNS/nobody/{APP_NAME}/storage/collections/data/{collection_name}?output_mode=json",
-                jsonargs=json.dumps(data),
-                method="POST",
-                sessionKey=self.session_key,
-                raiseAllErrors=True,
-            )
-            logger.info(f"Output write_kvstore_lookup_value: {json.loads(serverContent)}")
-        except Exception as e:
-            logger.exception(f"Exception in write_kvstore_lookup_value: {e}")
-            raise e
+        _, serverContent = rest.simpleRequest(
+            f"/servicesNS/nobody/{APP_NAME}/storage/collections/data/{collection_name}?output_mode=json",
+            jsonargs=json.dumps(data),
+            method="POST",
+            sessionKey=self.session_key,
+            raiseAllErrors=True,
+        )
+        logger.debug(f"Output write_kvstore_lookup_value: {json.loads(serverContent)}")
 
 
     def update_kvstore_lookup_value(self, collection_name, key, data):
-        try:
-            _, serverContent = rest.simpleRequest(
-                f"/servicesNS/nobody/{APP_NAME}/storage/collections/data/{collection_name}/{urllib.parse.quote(key)}?output_mode=json",
-                jsonargs=json.dumps(data),
-                method="POST",
-                sessionKey=self.session_key,
-                raiseAllErrors=True,
-            )
-            logger.info(f"Output update_kvstore_lookup_value: {json.loads(serverContent)}")
-        except Exception as e:
-            logger.exception(f"Exception in update_kvstore_lookup_value: {e}")
-            raise e
-
-
+        _, serverContent = rest.simpleRequest(
+            f"/servicesNS/nobody/{APP_NAME}/storage/collections/data/{collection_name}/{urllib.parse.quote(key)}?output_mode=json",
+            jsonargs=json.dumps(data),
+            method="POST",
+            sessionKey=self.session_key,
+            raiseAllErrors=True,
+        )
+        logger.debug(f"Output update_kvstore_lookup_value: {json.loads(serverContent)}")
 
 
     def delete_kvstore_lookup_by_query(self, collection_name, query):
@@ -94,19 +84,6 @@ class GreenAlertCommand(StreamingCommand):
             sessionKey=self.session_key,
             raiseAllErrors=True,
         )
-        return json.loads(serverContent)
-
-
-    def read_kvstore_lookup(self, collection_name):
-        _, serverContent = rest.simpleRequest(
-            "/servicesNS/nobody/{}/storage/collections/data/{}?output_mode=json".format(
-                APP_NAME, collection_name
-            ),
-            method="GET",
-            sessionKey=self.session_key,
-            raiseAllErrors=True,
-        )
-        return self._convert_str_to_dict(json.loads(serverContent))
 
 
     def _convert_str_to_dict(self, kvstore_collection_data):
@@ -117,78 +94,24 @@ class GreenAlertCommand(StreamingCommand):
         return kvstore_collection_data
 
 
-    def update_kvstore_lookup(self, collection_name, entries_to_update=[]):
-        if entries_to_update:
-            entries_to_update = self._convert_dict_to_str(entries_to_update)
-            # splunk.BadRequest: [HTTP 400] Bad Request; [{'type': 'ERROR', 'code': None, 'text': 'Request exceeds API limits - see limits.conf for details. (Too many documents for a single batch save, max_documents_per_batch_save=1000)'}]
-            if len(entries_to_update) < 1000:
-                jsonargs = json.dumps(entries_to_update)
-                _ = rest.simpleRequest(
-                    "/servicesNS/nobody/{}/storage/collections/data/{}/batch_save?output_mode=json".format(
-                        APP_NAME, collection_name
-                    ),
-                    method="POST",
-                    jsonargs=jsonargs,
-                    sessionKey=self.session_key,
-                    raiseAllErrors=True,
-                )
-            else:
-                updated_data_full = [
-                    entries_to_update[i: i + 800] for i in range(0, len(entries_to_update), 800)
-                ]  # send max 800 in each chunk
-                for chunk in updated_data_full:
-                    jsonargs = json.dumps(chunk)
-                    _ = rest.simpleRequest(
-                        "/servicesNS/nobody/{}/storage/collections/data/{}/batch_save?output_mode=json".format(
-                            APP_NAME, collection_name
-                        ),
-                        method="POST",
-                        jsonargs=jsonargs,
-                        sessionKey=self.session_key,
-                        raiseAllErrors=True,
-                    )
-            logger.info(
-                "Updated {} entries in the lookup.".format(
-                    len(entries_to_update))
-            )
-
-        else:
-            logger.info("No entry to update in the KVStore lookup.")
-
-
     def _convert_dict_to_str(self, alerts_details):
         for alert_info in alerts_details:
             alert_info["groupby_info"] = json.dumps(alert_info["groupby_info"])
         return alerts_details
 
 
-    def delete_kvstore_entry(self, collection_name, key):
-        try:
-            _ = rest.simpleRequest(
-                "/servicesNS/nobody/{}/storage/collections/data/{}/{}".format(
-                    APP_NAME, collection_name, urllib.parse.quote(key)
-                ),
-                method="DELETE",
-                sessionKey=self.session_key,
-                raiseAllErrors=True,
-            )
-        except Exception as e:
-            logger.info(
-                "Unable to delete the kvstore entry. error={}".format(str(e)))
-
-
     def _groupby_fields_list_to_str(self, groupby_field_names):
-        logger.debug(f"_groupby_fields_list_to_str -> groupby_field_names={groupby_field_names}")
+        # logger.debug(f"_groupby_fields_list_to_str -> groupby_field_names={groupby_field_names}")
         string_groupby = ",".join(groupby_field_names)
-        logger.debug(f"_groupby_fields_list_to_str -> string_groupby={string_groupby}")
+        # logger.debug(f"_groupby_fields_list_to_str -> string_groupby={string_groupby}")
         return string_groupby
 
     def _groupby_fields_str_to_list(self, groupby_field_names):
-        logger.debug(f"_groupby_fields_str_to_list -> groupby_field_names={groupby_field_names}")
+        # logger.debug(f"_groupby_fields_str_to_list -> groupby_field_names={groupby_field_names}")
         if not groupby_field_names:
             return []
         lst = sorted([ele.strip() for ele in groupby_field_names.split(",") if ele.strip()])
-        logger.debug(f"_groupby_fields_str_to_list -> lst={lst}")
+        # logger.debug(f"_groupby_fields_str_to_list -> lst={lst}")
         return lst
 
 
@@ -209,16 +132,16 @@ class GreenAlertCommand(StreamingCommand):
 
 
     def stream(self, records):
-        logger.info("green-alert internal logger")
+        logger.info("Green-alert Command stream()")
         if self.alertname and str(self.alertname) != "None":
             alert_name = self.alertname
         elif self.search_results_info.label:
             alert_name = self.search_results_info.label
         else:
             raise Exception("This can only be executed from alert or specify alertname option to the command.")
-        logger.info(f"alert_name: {alert_name}")
-        logger.info(f"groupbyfields: {self.groupbyfields}")
-        logger.info(f"statusfield: {self.statusfield}")
+        logger.info(f"INPUT - alert_name: {alert_name}")
+        logger.info(f"INPUT - groupbyfields: {self.groupbyfields}")
+        logger.info(f"INPUT - statusfield: {self.statusfield}")
 
         if not self.search_results_info or not self.search_results_info.auth_token:
             self.logger.error("Unable to get session key in the custom command.")
@@ -251,11 +174,11 @@ class GreenAlertCommand(StreamingCommand):
                 groupby_field_names_from_collection = groupby_field_names_from_input
                 groupby_field_names_lst_from_collection = groupby_field_names_lst_from_input
             
-            logger.debug("pre-processing completed")
+            logger.info("Pre-processing completed, evaluating the search result records next.")
 
             for record in records:
                 if self.statusfield in record:
-                    logger.debug(f"Evaluating the record: {record}")
+                    logger.debug(f"RECORD - Evaluating the record: {record}")
 
                     value1 = f"{alert_name}|"
                     groupby_field_values = ""
@@ -271,6 +194,7 @@ class GreenAlertCommand(StreamingCommand):
 
                     last_data_value_from_lookup = self.read_kvstore_lookup_value(KVSTORE_DATA_COLLECTION, hash_value, raiseNoErrors=True)
                     record_status = record[self.statusfield].upper().strip()
+                    logger.debug(f"RECORD - last_data_value_from_lookup={last_data_value_from_lookup}, record_status={record_status}")
 
                     if last_data_value_from_lookup:
                         if last_data_value_from_lookup['status'] == "GREEN":
