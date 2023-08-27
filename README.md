@@ -3,12 +3,12 @@ Splunk App has utility to easily generate Green alert once after the issue is re
 
 
 ## Download from Splunkbase
-TODO
+https://splunkbase.splunk.com/app/7016
 
 
 ## Overview
-The Green App is a Splunk App to provide utility to generate Green alert once after the issue is resolved. And also regenerate as long as issue is present.
-Usually with Splunk alerts you create alert when there is issue with system which is very easy to do with Splunk but then you are requested to also create alert when that issue fixed, but you need to generate that only once after the issue is fixed. You could use this App in those scenario.
+The Green App is a Splunk App to provides a utility to generate a Green alert once after the issue is resolved. And also regenerates as long as the issue is present.
+Usually with Splunk alerts, you create an alert when there is an issue with the system which is very easy to do with Splunk but then you are requested to also create an alert when that issue is fixed, but you need to generate that only once after the issue is fixed. You could use this App in those scenarios.
 
 * Author - Vatsal Jagani
 * Creates Index - False
@@ -76,28 +76,28 @@ Below is the details for the `greenalert` command.
 
 ### Topology and Setting Up Splunk Environment
 * This App only needs to be installed on `Search Head` and there is no explicit configuration is required.
-* For `Standalone` machine you need to install on that Splunk instance.
+* For the `Standalone` machine you need to install it on that Splunk instance.
 
 ### Installation
 * Install the App on the `Search Head` only.
 
 
 ### Dependencies
-* There is no external Dependencies for this App.
+* There are no external Dependencies for this App.
 
 
 ### Configuration
-* There is no explicit configuration is required for this App.
+* There is no explicit configuration required for this App.
 
 ### Data Collection
-* No data collection required for this App.
+* No data collection is required for this App.
 
 
 ### Uninstall App
 To uninstall the app, the users can follow the below steps:
 * SSH or RDP to the Splunk instance
 * Go to folder apps($SPLUNK_HOME/etc/apps).
-* Remove the `green_alerts_app` folder from apps directory
+* Remove the `green_alerts_app` folder from the apps directory
 * Restart Splunk
 
 
