@@ -1,0 +1,4 @@
+<nav search_view="search">
+  <view name="search" default="true"/>
+  <a href="https://github.com/VatsalJagani/Splunk-Green-Alerts-App" target="_blank" rel="noopener noreferrer">Green Alerts App Documentation</a>
+</nav>
