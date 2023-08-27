@@ -105,7 +105,7 @@ To uninstall the app, the users can follow the below steps:
 ## Release Notes
 
 #### Version 1.0.0 (Aug 2023)
-* Created the first version of the App with custom command to achieve the 
+* Created the first version of the App with custom command to achieve the functionality specified.
 
 
 
