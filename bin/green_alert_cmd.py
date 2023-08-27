@@ -29,7 +29,7 @@ def generate_hash(input_string, algorithm='sha256'):
 
 
 @Configuration(local=True)
-class GreenAlertsCommand(StreamingCommand):
+class GreenAlertCommand(StreamingCommand):
 
     alertname = Option(name="alertname", default=None, require=False)
     statusfield = Option(name="statusfield", default="status", require=False)
@@ -298,10 +298,10 @@ class GreenAlertsCommand(StreamingCommand):
                     logger.info(f"This record ({record}) does not have any status field hence ignoring.")
 
         except Exception as err:
-            msg = "Error occurred in GreenAlertsCommand: {}".format(err)
+            msg = "Error occurred in GreenAlertCommand: {}".format(err)
             self.write_error(msg)
             logger.exception(msg)
 
 
 if __name__ == "__main__":
-    dispatch(GreenAlertsCommand, sys.argv, sys.stdin, sys.stdout, __name__)
+    dispatch(GreenAlertCommand, sys.argv, sys.stdin, sys.stdout, __name__)
