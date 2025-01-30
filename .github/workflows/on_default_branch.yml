@@ -13,7 +13,7 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: VatsalJagani/splunk-app-action@v4
+      - uses: VatsalJagani/splunk-app-action@v4.1
         with:
           to_make_permission_changes: true
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
@@ -22,3 +22,4 @@ jobs:
           my_github_token: ${{ secrets.MY_GITHUB_TOKEN }}
           logger_log_files_prefix: "greenalert"
           logger_sourcetype: "greenalert:logs"
+          splunk_python_sdk_install_path: "lib"
