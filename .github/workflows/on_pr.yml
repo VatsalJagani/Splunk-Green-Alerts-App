@@ -15,7 +15,7 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: VatsalJagani/splunk-app-action@v4.2.3
+      - uses: VatsalJagani/splunk-app-action@v4.3.0
         with:
           is_app_inspect_check: false
           to_make_permission_changes: true
