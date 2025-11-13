@@ -7,14 +7,14 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   pre-release:
     name: "Run on Default Branch - Add Utilities & App Inspect"
     runs-on: "ubuntu-latest"
-
-    permissions:
-      contents: write
-      pull-requests: write
 
     steps:
       - uses: VatsalJagani/splunk-app-action@v4.10.0
