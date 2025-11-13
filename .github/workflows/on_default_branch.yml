@@ -12,14 +12,17 @@ jobs:
     name: "Run on Default Branch - Add Utilities & App Inspect"
     runs-on: "ubuntu-latest"
 
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
-      - uses: VatsalJagani/splunk-app-action@v4.1
+      - uses: VatsalJagani/splunk-app-action@v4.10.0
         with:
           to_make_permission_changes: true
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
           splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
-          app_utilities: "whats_in_the_app, logger, splunk_python_sdk"
-          my_github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          app_utilities: "whats_in_the_app, logger"
           logger_log_files_prefix: "greenalert"
           logger_sourcetype: "greenalert:logs"
-          splunk_python_sdk_install_path: "lib"
+          python_requirements_file: "lib/requirements.txt"
