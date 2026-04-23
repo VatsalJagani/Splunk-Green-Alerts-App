@@ -23,3 +23,5 @@ jobs:
           logger_log_files_prefix: "greenalert"
           logger_sourcetype: "greenalert:logs"
           python_requirements_file: "lib/requirements.txt"
+        env:
+          SPLUNK_APP_ACTION_1: "rm -f CLAUDE.md"

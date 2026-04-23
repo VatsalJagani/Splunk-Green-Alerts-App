@@ -18,3 +18,5 @@ jobs:
           local_app_inspect: true
           to_make_permission_changes: true
           python_requirements_file: "lib/requirements.txt"
+        env:
+          SPLUNK_APP_ACTION_1: "rm -f CLAUDE.md"
