@@ -13,6 +13,8 @@ Usually with Splunk alerts, you create an alert when there is an issue with the 
 * Author - Vatsal Jagani
 * Creates Index - False
 * Compatible with:
+    * Splunk Cloud
+    * Splunk Enterprise version: 10.2.x, 10.0.x, 9.4.x, 9.3.x, 9.2.x
     * OS: Platform Independent
     * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -103,6 +105,9 @@ To uninstall the app, the users can follow the below steps:
 
 
 ## Release Notes
+
+#### Version 1.2.1 (Apr 2026)
+* Splunklib (splunk-sdk) updated to version 2.1.1
 
 #### Version 1.2.0 (Nov 2025)
 * Splunklib updated to the latest version.
