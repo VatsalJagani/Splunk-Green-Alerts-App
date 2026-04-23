@@ -104,6 +104,9 @@ To uninstall the app, the users can follow the below steps:
 
 ## Release Notes
 
+#### Version 1.2.1 (Apr 2026)
+* Splunk updated to version 2.1.1
+
 #### Version 1.2.0 (Nov 2025)
 * Splunklib updated to the latest version.
 * Improved logger python file.
