@@ -1,21 +1,19 @@
-name: "On PR - Generate Build"
+name: "Build and Local App Inspect"
 
 on:
   pull_request:
     branches:
-      - '*'
-      - '*/*'
-      - '**'
+      - develop
 
   workflow_dispatch:
 
 jobs:
-  pre-release:
-    name: "On PR - Generate Build"
+  on_pr:
+    name: "Build and Local App Inspect"
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: VatsalJagani/splunk-app-action@v4.10.0
+      - uses: VatsalJagani/splunk-app-action@v6
         with:
           local_app_inspect: true
           to_make_permission_changes: true

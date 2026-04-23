@@ -1,4 +1,4 @@
-name: "Run on Default Branch - Add Utilities & App Inspect"
+name: "Build, Splunkbase App Inspect, App Utilities"
 
 on:
   push:
@@ -9,12 +9,12 @@ on:
 
 
 jobs:
-  pre-release:
-    name: "Run on Default Branch - Add Utilities & App Inspect"
+  on_main:
+    name: "Build, Splunkbase App Inspect, App Utilities"
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: VatsalJagani/splunk-app-action@v4.10.0
+      - uses: VatsalJagani/splunk-app-action@v6
         with:
           to_make_permission_changes: true
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
