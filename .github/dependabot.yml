@@ -1,19 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
-    directory: "/lib"
+  - package-ecosystem: pip
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
-      all-dependencies:
+      python-dependencies:
         patterns:
           - "*"
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
-      all-dependencies:
+      github-actions-dependencies:
         patterns:
           - "*"
