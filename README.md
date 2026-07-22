@@ -1,8 +1,6 @@
 # Splunk-Green-Alerts-App
 Splunk App has utility to easily generate Green alert once after the issue is resolved. And also regenerate as long as issue is present.
 
-Note:- Do not use App version 2.0.0 and above for Splunk version below 10.4.0.
-
 
 ## Download from Splunkbase
 https://splunkbase.splunk.com/app/7016
@@ -16,7 +14,7 @@ Usually with Splunk alerts, you create an alert when there is an issue with the 
 * Creates Index - False
 * Compatible with:
     * Splunk Cloud
-    * Splunk Enterprise version: 10.4.x
+    * Splunk Enterprise version: 10.4.x, 10.2.x, 10.0.x, 9.4.x, 9.3.x, 9.2.x
     * OS: Platform Independent
     * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -108,10 +106,9 @@ To uninstall the app, the users can follow the below steps:
 
 ## Release Notes
 
-#### Version 2.0.0 (July 2026)
-* Added compatibility with Python 3.13.
-* Splunklib (splunk-sdk) updated to version 3.0.0.
-* Now supports Splunk Enterprise 10.4.x and higher only (drops support for Splunk versions below 10.4.0).
+#### Version 1.3.0 (July 2026)
+* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support.
+* `splunk-sdk` pinned to 2.1.1 (compatible with both Python 3.9 and 3.13).
 
 #### Version 1.2.1 (Apr 2026)
 * Splunklib (splunk-sdk) updated to version 2.1.1
