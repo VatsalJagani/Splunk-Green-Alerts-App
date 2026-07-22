@@ -223,7 +223,7 @@ class GreenAlertCommand(StreamingCommand):
                     logger.info(f"This record ({record}) does not have any status field hence ignoring.")
 
         except Exception as err:
-            msg = "Error occurred in GreenAlertCommand: {}".format(err)
+            msg = f"Error occurred in GreenAlertCommand: {err}"
             self.write_error(msg)
             logger.exception(msg)
 
