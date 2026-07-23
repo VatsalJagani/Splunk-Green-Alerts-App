@@ -14,7 +14,7 @@ Usually with Splunk alerts, you create an alert when there is an issue with the 
 * Creates Index - False
 * Compatible with:
     * Splunk Cloud
-    * Splunk Enterprise version: 10.4.x, 10.2.x, 10.0.x, 9.4.x, 9.3.x, 9.2.x
+    * Splunk Enterprise version: 10.2.x, 10.4.x
     * OS: Platform Independent
     * Browser: Google Chrome, Mozilla Firefox, Safari
 
