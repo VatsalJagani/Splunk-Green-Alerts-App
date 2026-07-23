@@ -14,7 +14,7 @@ Usually with Splunk alerts, you create an alert when there is an issue with the 
 * Creates Index - False
 * Compatible with:
     * Splunk Cloud
-    * Splunk Enterprise version: 10.2.x, 10.0.x, 9.4.x, 9.3.x, 9.2.x
+    * Splunk Enterprise version: 10.2.x, 10.4.x
     * OS: Platform Independent
     * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -105,6 +105,10 @@ To uninstall the app, the users can follow the below steps:
 
 
 ## Release Notes
+
+#### Version 1.3.0 (July 2026)
+* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support.
+* `splunk-sdk` pinned to 2.1.1 (compatible with both Python 3.9 and 3.13).
 
 #### Version 1.2.1 (Apr 2026)
 * Splunklib (splunk-sdk) updated to version 2.1.1
